@@ -131,7 +131,7 @@ const PassengerForm = () => {
 
   let isProdEnv = process.env.NODE_ENV === "production" ? true : false;
   let envUrl = "";
-  let envArsLms = pageUrl.includes("lms") ? "lms" : "ars";
+  let envArsLms = pageUrl.includes("CHANGE") ? "CHANGE" : "CHANGE";
   let s3Url = process.env.REACT_APP_S3_PREFIX;
   let loungeCode = isProdEnv
     ? pageUrl.substring(pageUrl.lastIndexOf("/") + 1)
@@ -181,22 +181,22 @@ const PassengerForm = () => {
     if (!img) FetchLoungeInfo();
   }, []);
 
-  // build ENV url based on URL when loading. Defaults to ARS
+  // build ENV url based on URL when loading. Defaults to yrdudtuk
   const createEnvUrl = () => {
     let newUrl = "";
 
     if (isProdEnv) {
       if (!pageUrl.includes("qa")) {
-        newUrl = pageUrl.includes("aldpos")
-          ? process.env.REACT_APP_ALDPOS_API_PROD
-          : process.env.REACT_APP_LMS_API_PROD;
+        newUrl = pageUrl.includes("CHANGE")
+          ? process.env.CHANGE
+          : process.env.CHANGE;
       } else {
-        newUrl = pageUrl.includes("aldpos")
-          ? process.env.REACT_APP_ALDPOS_API_DEV
-          : process.env.REACT_APP_LMS_API_DEV;
+        newUrl = pageUrl.includes("CHANGE")
+          ? process.env.CHANGE
+          : process.env.CHANGE;
       }
     } else {
-      newUrl = process.env.REACT_APP_API_LOCAL_URL;
+      newUrl = process.env.CHANGE;
     }
     return newUrl;
   };
@@ -205,13 +205,13 @@ const PassengerForm = () => {
   // creates s3 URL for Logo Image
   const createS3Url = () => {
     if (isProdEnv) {
-      s3Url += pageUrl.includes("lms")
-        ? process.env.REACT_APP_LMS_S3_BUCKET
-        : process.env.REACT_APP_ALDPOS_S3_BUCKET;
+      s3Url += pageUrl.includes("CHANGE")
+        ? process.env.CHANGE
+        : process.env.CHANGE;
     } else {
-      s3Url += pageUrl.includes("lms")
-        ? process.env.REACT_APP_LMS_S3_BUCKET
-        : process.env.REACT_APP_ALDPOS_S3_BUCKET;
+      s3Url += pageUrl.includes("CHANGE")
+        ? process.env.CHANGE
+        : process.env.CHANGE;
     }
 
     return s3Url;
@@ -222,7 +222,7 @@ const PassengerForm = () => {
   // build up S3 Bucket string depending on ENV/LoungeCode
   // set the obj url to Img component on render.
   const FetchLoungeInfo = () => {
-    let tempImgUrl = s3Url + process.env.REACT_APP_S3_BUCKET_IMAGES;
+    let tempImgUrl = s3Url + process.env.CHANGE;
     axios({
       method: "post",
       url: envUrl + "getLoungeInfo",
@@ -248,7 +248,7 @@ const PassengerForm = () => {
           isProd: pageUrl.includes("qa") ? false : true,
           loungeName: res.data.LoungeName,
           waitlistEmailLogo: res.data.WaitlistEmailLogo,
-          s3Url: (s3Url += process.env.REACT_APP_S3_BUCKET_EMAIL),
+          s3Url: (s3Url += process.env.CHANGE),
         });
         if (!res.data.WaitlistEmailLogo == undefined) {
           setImg(true);
